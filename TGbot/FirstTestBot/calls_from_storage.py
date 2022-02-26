@@ -1,7 +1,6 @@
 import pandas as pd
 import random
-
-DATA_PATH = '/home/spitsyn/PsychoBot/parsing/data/data.csv'
+from config import DATA_PATH
 
 data = pd.read_csv(DATA_PATH)
 

@@ -1,9 +1,9 @@
-import config
+from config import API_TOKEN
 from calls_from_storage import take_random_quote
 from aiogram import Bot, Dispatcher, executor, types
 
 # Initialize bot and dispatcher
-bot = Bot(token=config.API_TOKEN)
+bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
