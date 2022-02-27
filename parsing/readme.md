@@ -1,5 +1,5 @@
-themes.pickle - лист с темами/ключевыми словами (https://uaforizm.com/aforizmy-i-citaty-po-alfavitu.html)
+links.pickle - лист с ссылками c http://uaforizm.com/
 
-links.pickle - лист с ссылками (http://uaforizm.com/)
+links2.pickle - лист с ссылками с https://mislitel.info/
 
-data.csv - все данные с этого прекрасного сайта
+data.csv - данные <цитата-автор>
