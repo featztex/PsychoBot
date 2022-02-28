@@ -31,11 +31,6 @@ async def send_random_quote(message: types.Message):
     """
     await message.reply(take_random_quote() + '\n')
 
-@dp.message_handler(regexp='Викторина')
-async def make_quiz(message: types.Message):
-    #need to create realisation of quiz here
-    pass
-
 @dp.message_handler(lambda message: message.text not in buttons_text)   
 async def reply_to_other_messages(message: types.Message):
     await message.reply('Я пока не умею отвечать на другие запросы\n')
