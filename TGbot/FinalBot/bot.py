@@ -24,7 +24,7 @@ async def get_topic(message: types.Message):
 
 @dp.message_handler(state='get_topic')
 async def send_quotes_by_topic(message: types.Message):
-    #await dp.current_state(user=message.from_user.id).reset_state()
+    await dp.current_state(user=message.from_user.id).reset_state()
     await bot.send_message(message.from_user.id, r'"Отправил тебе цитаты по теме"',
                            reply_markup=kb.start_kb)
 
