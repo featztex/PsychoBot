@@ -27,7 +27,7 @@ class Quote:
 
         self.model_d2v = gensim.models.doc2vec.Doc2Vec.load('models/d2v_v1-0.model')
         # suggested quotes
-        self.Q_NUMBER = 10
+        self.Q_NUMBER = 1
 
     # Preprocess function (stopwords, puncuation, etc)
 
