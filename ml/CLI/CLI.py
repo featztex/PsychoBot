@@ -4,7 +4,8 @@ from pymystem3 import Mystem
 from nltk.corpus import stopwords
 import gensim
 import nltk
-
+import sys
+import argparse
 
 class Quote:
     user_feelings = ""
@@ -46,10 +47,17 @@ class Quote:
             print(" ".join(self.quote_words[quote[0]]))
 
 
+def createParser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('text', nargs=1)
+
+    return parser
+
+parser = createParser()
+namespace = parser.parse_args (sys.argv[1:])
+
 # Эту строчку можно закомментить после первого запуска
 nltk.download("stopwords")
 p = Quote()
-print("Напечайтайте что хотите \n")
-user_feelings = input()
-p.preprocess_text(user_feelings)
+p.preprocess_text("".join(namespace.text))
 p.basic_model()
