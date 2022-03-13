@@ -43,9 +43,10 @@ class Quote:
         sim = self.model_d2v.dv.most_similar(
             self.model_d2v.infer_vector(self.list_for_model), topn=self.Q_NUMBER)
         for quote in sim:
-            print(" ".join(self.quote_words[quote[0]]), round(quote[1], 3))
+            print(" ".join(self.quote_words[quote[0]]))
 
 
+# Эту строчку можно закомментить после первого запуска
 nltk.download("stopwords")
 p = Quote()
 print("Напечайтайте что хотите \n")
