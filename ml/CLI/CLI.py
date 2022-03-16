@@ -3,9 +3,9 @@ from string import punctuation
 from pymystem3 import Mystem
 from nltk.corpus import stopwords
 import gensim
-import nltk
-import sys
-import argparse
+# import nltk
+# import sys
+# import argparse
 
 class Quote:
     user_feelings = ""
@@ -52,21 +52,21 @@ class Quote:
         for quote in sim:
             print(" ".join(self.quote_words[quote[0]]))
 
-
-def createParser():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('text', nargs=1)
-    return parser
-
-parser = createParser()
-namespace = parser.parse_args (sys.argv[1:])
-
-# Эту строчку можно закомментить после первого запуска
-nltk.download("stopwords")
-# при инициализации нужно указывать сначала путь к csv, потом к моделям, насколько я понял нужен полный путь
-# через относительный не смог найти как это сделать. Можно в теории использовать pathlib, но пока хз насколько имеет смысл это делать
-
-p = Quote("/home/alex/4sem/Project/PsychoBot/ml/CLI/processed_q.csv", "/home/alex/4sem/Project/PsychoBot/ml/CLI/models/d2v_v1-0.model")
-p.preprocess_text("".join(namespace.text))
-p.basic_model()
-p.basic_model()
+#
+# def createParser():
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument('text', nargs=1)
+#     return parser
+#
+# parser = createParser()
+# namespace = parser.parse_args (sys.argv[1:])
+#
+# # Эту строчку можно закомментить после первого запуска
+# nltk.download("stopwords")
+# # при инициализации нужно указывать сначала путь к csv, потом к моделям, насколько я понял нужен полный путь
+# # через относительный не смог найти как это сделать. Можно в теории использовать pathlib, но пока хз насколько имеет смысл это делать
+#
+# p = Quote("/home/alex/4sem/Project/PsychoBot/ml/CLI/processed_q.csv", "/home/alex/4sem/Project/PsychoBot/ml/CLI/models/d2v_v1-0.model")
+# p.preprocess_text("".join(namespace.text))
+# p.basic_model()
+# p.basic_model()
