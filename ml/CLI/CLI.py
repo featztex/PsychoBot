@@ -3,9 +3,9 @@ from string import punctuation
 from pymystem3 import Mystem
 from nltk.corpus import stopwords
 import gensim
-# import nltk
-# import sys
-# import argparse
+import nltk
+import sys
+import argparse
 
 class Quote:
     user_feelings = ""
@@ -35,7 +35,7 @@ class Quote:
         self.model_d2v = gensim.models.doc2vec.Doc2Vec.load(path_to_model)
 
         # suggested quotes
-        self.Q_NUMBER = 1
+        self.Q_NUMBER = 6
 
     # Preprocess function (stopwords, puncuation, etc)
 
@@ -52,24 +52,25 @@ class Quote:
             self.model_d2v.infer_vector(self.list_for_model), topn=self.Q_NUMBER)
         for quote in sim:
             #print(" ".join(self.quote_words[quote[0]]))
-            self.answer = " ".join(self.quote_words[quote[0]])
+            self.answer = self.answer + " ".join(self.quote_words[quote[0]]) + '\n'
 
-        return self.answer
 
-#
-# def createParser():
-#     parser = argparse.ArgumentParser()
-#     parser.add_argument('text', nargs=1)
-#     return parser
-#
-# parser = createParser()
-# namespace = parser.parse_args(sys.argv[1:])
-#
-# # Эту строчку можно закомментить после первого запуска
-# #nltk.download("stopwords")
-# # при инициализации нужно указывать сначала путь к csv, потом к моделям, насколько я понял нужен полный путь
-# # через относительный не смог найти как это сделать. Можно в теории использовать pathlib, но пока хз насколько имеет смысл это делать
-#
-# p = Quote("/home/alex/4sem/Project/PsychoBot/ml/CLI/processed_q.csv", "/home/alex/4sem/Project/PsychoBot/ml/CLI/models/d2v_v1-0.model")
-# p.preprocess_text("".join(namespace.text))
-# print(p.basic_model())
+        return self.answer[:-1]
+
+
+def createParser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('text', nargs=1)
+    return parser
+
+parser = createParser()
+namespace = parser.parse_args(sys.argv[1:])
+
+# Эту строчку можно закомментить после первого запуска
+#nltk.download("stopwords")
+# при инициализации нужно указывать сначала путь к csv, потом к моделям, насколько я понял нужен полный путь
+# через относительный не смог найти как это сделать. Можно в теории использовать pathlib, но пока хз насколько имеет смысл это делать
+
+p = Quote("/home/alex/4sem/Project/PsychoBot/ml/CLI/processed_q.csv", "/home/alex/4sem/Project/PsychoBot/ml/CLI/models/d2v_v1-0.model")
+p.preprocess_text("".join(namespace.text))
+print(p.basic_model())
