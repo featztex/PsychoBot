@@ -13,6 +13,7 @@ class Quote:
     processed_feelings = ""
     path_to_csv = ""
     path_to_model = ""
+    answer = ""
 
     def __init__(self, path_to_csv, path_to_model):
         self.path_to_csv = path_to_csv
@@ -50,7 +51,10 @@ class Quote:
         sim = self.model_d2v.dv.most_similar(
             self.model_d2v.infer_vector(self.list_for_model), topn=self.Q_NUMBER)
         for quote in sim:
-            print(" ".join(self.quote_words[quote[0]]))
+            #print(" ".join(self.quote_words[quote[0]]))
+            self.answer = " ".join(self.quote_words[quote[0]])
+
+        return self.answer
 
 #
 # def createParser():
@@ -59,14 +63,13 @@ class Quote:
 #     return parser
 #
 # parser = createParser()
-# namespace = parser.parse_args (sys.argv[1:])
+# namespace = parser.parse_args(sys.argv[1:])
 #
 # # Эту строчку можно закомментить после первого запуска
-# nltk.download("stopwords")
+# #nltk.download("stopwords")
 # # при инициализации нужно указывать сначала путь к csv, потом к моделям, насколько я понял нужен полный путь
 # # через относительный не смог найти как это сделать. Можно в теории использовать pathlib, но пока хз насколько имеет смысл это делать
 #
 # p = Quote("/home/alex/4sem/Project/PsychoBot/ml/CLI/processed_q.csv", "/home/alex/4sem/Project/PsychoBot/ml/CLI/models/d2v_v1-0.model")
 # p.preprocess_text("".join(namespace.text))
-# p.basic_model()
-# p.basic_model()
+# print(p.basic_model())
