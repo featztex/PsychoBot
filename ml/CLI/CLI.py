@@ -13,7 +13,7 @@ class Quote:
     processed_feelings = ""
     path_to_csv = ""
     path_to_model = ""
-    answer = ""
+    #answer = ""
 
     def __init__(self, path_to_csv, path_to_model):
         self.path_to_csv = path_to_csv
@@ -50,12 +50,11 @@ class Quote:
     def basic_model(self):
         sim = self.model_d2v.dv.most_similar(
             self.model_d2v.infer_vector(self.list_for_model), topn=self.Q_NUMBER)
+        answer = ""
         for quote in sim:
             #print(" ".join(self.quote_words[quote[0]]))
-            self.answer = self.answer + " ".join(self.quote_words[quote[0]]) + '\n'
-
-
-        return self.answer[:-1]
+            answer = answer + " ".join(self.quote_words[quote[0]]) + '\n'
+        return answer[:-1]
 
 #
 # def createParser():
