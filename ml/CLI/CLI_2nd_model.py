@@ -3,9 +3,7 @@ from string import punctuation
 from pymystem3 import Mystem
 from nltk.corpus import stopwords
 import gensim
-# import numpy as np
-# import io
-#
+
 # import nltk
 # import sys
 # import argparse
@@ -16,9 +14,11 @@ class Quote:
     processed_feelings = ""
     path_to_csv = ""
     path_to_model = ""
+    path_to_data = ""
     #answer = ""
 
-    def __init__(self, path_to_csv, path_to_model):
+    def __init__(self,  path_to_data, path_to_csv, path_to_model):
+        self.path_to_data = path_to_data
         self.path_to_csv = path_to_csv
         self.path_to_model = path_to_model
         # files:
@@ -26,9 +26,11 @@ class Quote:
         self.mystem = Mystem()
         self.russian_stopwords = stopwords.words("russian")
         # reading csv
-        self.df_35k = pd.read_csv(path_to_csv, sep=',', engine='python')
+        self.df_35k = pd.read_csv(path_to_data, sep=',', engine='python')
         # processed_q.csv
-        df = pd.read_csv('/home/alex/4sem/Project/PsychoBot/ml/processed_data/pure_q_35k.csv', engine='python')
+        #'/home/alex/4sem/Project/PsychoBot/ml/processed_data/pure_q_35k.csv'
+        df = pd.read_csv(path_to_csv, engine='python')
+
         # lists of quotes
         self.quote_tokens = [q.split()
                              for q in df['processed_quotes'].values.tolist()]
@@ -75,6 +77,7 @@ class Quote:
 # # через относительный не смог найти как это сделать. Можно в теории использовать pathlib, но пока хз насколько имеет смысл это делать
 #
 # p = Quote('/home/alex/4sem/Project/PsychoBot/parsing/data/big_data.csv',
+#           '/home/alex/4sem/Project/PsychoBot/ml/processed_data/pure_q_35k.csv',
 #           '../models/d2v_35k_exp.model')
 # p.preprocess_text("".join(namespace.text))
 # print(p.basic_model())
