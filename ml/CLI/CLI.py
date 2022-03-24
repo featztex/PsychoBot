@@ -50,18 +50,18 @@ class Quote:
     def basic_model(self):
         sim = self.model_d2v.dv.most_similar(
             self.model_d2v.infer_vector(self.list_for_model), topn=self.Q_NUMBER)
-        answer = ""
+        answer = []
         for quote in sim:
             #print(" ".join(self.quote_words[quote[0]]))
-            answer = answer + " ".join(self.quote_words[quote[0]]) + '\n'
-        return answer[:-1]
+            answer.append(" ".join(self.quote_words[quote[0]]))
+        return answer
 
 #
 # def createParser():
 #     parser = argparse.ArgumentParser()
 #     parser.add_argument('text', nargs=1)
 #     return parser
-#
+
 # parser = createParser()
 # namespace = parser.parse_args(sys.argv[1:])
 #
