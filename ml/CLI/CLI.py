@@ -7,9 +7,11 @@ from pymystem3 import Mystem
 from nltk.corpus import stopwords
 import gensim
 
-# import nltk
-# import sys
-# import argparse
+import nltk
+import sys
+import argparse
+
+
 
 class Quote:
     user_feelings = ""
@@ -29,10 +31,10 @@ class Quote:
         self.mystem = Mystem()
         self.russian_stopwords = stopwords.words("russian")
         # reading csv
-        self.df_35k = pd.read_csv(path_to_data, sep=',', engine='python')
+        self.df_35k = pd.read_csv(self.path_to_data, sep=',', engine='python')
         # processed_q.csv
         #'/home/alex/4sem/Project/PsychoBot/ml/processed_data/pure_q_35k.csv'
-        df = pd.read_csv(path_to_csv, engine='python')
+        df = pd.read_csv(self.path_to_csv, engine='python')
 
         # lists of quotes
         self.quote_tokens = [q.split()
@@ -61,26 +63,33 @@ class Quote:
         answer = []
         for quote in sim:
             #print(" ".join(self.quote_words[quote[0]]))
-            answer.append((" ".join(self.quote_words[quote[0]]), self.df_35k['author'][quote[0]]))
+            t = '"'
+            if self.quote_words[quote[0]][0][0] == '"':   #проверка на кавычки
+                t = ''
+            answer.append((t + " ".join(self.quote_words[quote[0]])  + t , self.df_35k['author'][quote[0]]))
         return answer
 
+    def end_of_quote(self, real_quote, guessed_quote):
 
-#
-# def createParser():
-#     parser = argparse.ArgumentParser()
-#     parser.add_argument('text', nargs=1)
-#     return parser
-#
-# parser = createParser()
-# namespace = parser.parse_args(sys.argv[1:])
-#
-# # Эту строчку можно закоментить после первого запуска
-# #nltk.download("stopwords")
-# # при инициализации нужно указывать сначала путь к csv, потом к моделям, насколько я понял нужен полный путь
-# # через относительный не смог найти как это сделать. Можно в теории использовать pathlib, но пока хз насколько имеет смысл это делать
-#
-# p = Quote('/home/alex/4sem/Project/PsychoBot/parsing/data/big_data.csv',
-#           '/home/alex/4sem/Project/PsychoBot/ml/processed_data/pure_q_35k.csv',
-#           '../models/d2v_35k_exp.model')
-# p.preprocess_text("".join(namespace.text))
-# print(p.basic_model())
+        self.model.dv.n_similarity(real_quote, guessed_quote)
+
+
+def createParser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('text', nargs=1)
+    return parser
+
+parser = createParser()
+namespace = parser.parse_args(sys.argv[1:])
+
+# Эту строчку можно закоментить после первого запуска
+#nltk.download("stopwords")
+# при инициализации нужно указывать сначала путь к csv, потом к моделям, насколько я понял нужен полный путь
+# через относительный не смог найти как это сделать. Можно в теории использовать pathlib, но пока хз насколько имеет смысл это делать
+#/home/alex/4sem/Project/PsychoBot/parsing/data/
+#/home/alex/4sem/Project/PsychoBot/ml/processed_data/
+p = Quote("../../parsing/data/big_data.csv",
+          "../processed_data/pure_q_35k.csv",
+          "../models/d2v_35k_exp.model")
+p.preprocess_text("".join(namespace.text))
+print(p.basic_model())
