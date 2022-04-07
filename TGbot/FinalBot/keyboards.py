@@ -3,9 +3,6 @@
 from aiogram.types import ReplyKeyboardRemove, \
     ReplyKeyboardMarkup, KeyboardButton, \
     InlineKeyboardMarkup, InlineKeyboardButton
-from numpy import choose
-
-import config
 import pickle
 from random import randint, shuffle
 
@@ -21,7 +18,7 @@ choose_quiz_kb = ReplyKeyboardMarkup(resize_keyboard=True).add(*quizzes)
 choose_quiz_kb.add('🔙 Назад')
 
 def guess_author_kb(correct_author):
-    with open(config.PATH_TO_AUTHORS_QUIZ, 'rb') as f:
+    with open('../../parsing/data/authors_for_quiz_1.pickle', 'rb') as f:
         names = list(pickle.load(f))
         names.remove(correct_author)
     
