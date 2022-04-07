@@ -7,9 +7,9 @@ from pymystem3 import Mystem
 from nltk.corpus import stopwords
 import gensim
 
-import nltk
-import sys
-import argparse
+# import nltk
+# import sys
+# import argparse
 
 
 
@@ -72,24 +72,24 @@ class Quote:
     def end_of_quote(self, real_quote, guessed_quote):
 
         self.model.dv.n_similarity(real_quote, guessed_quote)
-
-
-def createParser():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('text', nargs=1)
-    return parser
-
-parser = createParser()
-namespace = parser.parse_args(sys.argv[1:])
-
-# Эту строчку можно закоментить после первого запуска
-#nltk.download("stopwords")
-# при инициализации нужно указывать сначала путь к csv, потом к моделям, насколько я понял нужен полный путь
-# через относительный не смог найти как это сделать. Можно в теории использовать pathlib, но пока хз насколько имеет смысл это делать
-#/home/alex/4sem/Project/PsychoBot/parsing/data/
-#/home/alex/4sem/Project/PsychoBot/ml/processed_data/
-p = Quote("../../parsing/data/big_data.csv",
-          "../processed_data/pure_q_35k.csv",
-          "../models/d2v_35k_exp.model")
-p.preprocess_text("".join(namespace.text))
-print(p.basic_model())
+#
+#
+# def createParser():
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument('text', nargs=1)
+#     return parser
+#
+# parser = createParser()
+# namespace = parser.parse_args(sys.argv[1:])
+#
+# # Эту строчку можно закоментить после первого запуска
+# #nltk.download("stopwords")
+# # при инициализации нужно указывать сначала путь к csv, потом к моделям, насколько я понял нужен полный путь
+# # через относительный не смог найти как это сделать. Можно в теории использовать pathlib, но пока хз насколько имеет смысл это делать
+# #/home/alex/4sem/Project/PsychoBot/parsing/data/
+# #/home/alex/4sem/Project/PsychoBot/ml/processed_data/
+# p = Quote("../../parsing/data/big_data.csv",
+#           "../processed_data/pure_q_35k.csv",
+#           "../models/d2v_35k_exp.model")
+# p.preprocess_text("".join(namespace.text))
+# print(p.basic_model())
