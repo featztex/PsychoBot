@@ -47,13 +47,12 @@ async def get_topic(message: types.Message):
 
 @dp.message_handler(state='get_topic')
 async def send_quotes_by_topic(message: types.Message):
-    await dp.current_state(user=message.from_user.id).reset_state()
     quote.preprocess_text(message.text)
     quotes_and_authors_list = quote.basic_model()
-    final_message = '\n\n📝'.join(quote_ + '\n' + '©' + author 
+    final_message = '\n\n📝'.join(quote_ + '\n' + '© ' + author 
                                    for quote_, author in quotes_and_authors_list)
     await bot.send_message(message.from_user.id, '📝' + final_message,
-                           reply_markup=kb.start_kb)
+                           reply_markup=kb.cancel_kb)
 
 
 @dp.message_handler(commands=['quiz'])
