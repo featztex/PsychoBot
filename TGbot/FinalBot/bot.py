@@ -6,13 +6,14 @@ import keyboards as kb
 import messages as msgs
 import calls_to_data as data
 import sys 
-sys.path.append(config.PATH_TO_CLI)
+sys.path.append('../../ml/CLI')
 from CLI import Quote
 
 
 bot = Bot(token=config.API_TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
-quote = Quote(config.PATH_TO_BIG_DATA, config.PATH_TO_35K_CSV, config.PATH_TO_MODEL)
+quote = Quote('../../parsing/data/big_data.csv', '../../ml/processed_data/pure_q_35k.csv', 
+              '../../ml/models/d2v_35k_exp.model')
 quote.Q_NUMBER = 5
 
 logging.basicConfig(level=logging.INFO)
