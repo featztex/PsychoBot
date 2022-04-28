@@ -37,7 +37,7 @@ async def cancel(message: types.Message):
                            reply_markup=kb.start_kb)
 
 
-@dp.message_handler(commands=['quote_by_topic'])
+@dp.message_handler(commands=['quotes_by_topic'])
 @dp.message_handler(regexp='📚Цитаты по теме')
 async def get_topic(message: types.Message):
     await dp.current_state(user=message.from_user.id).set_state('get_topic')
