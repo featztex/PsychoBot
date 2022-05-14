@@ -53,6 +53,8 @@ async def send_quotes_by_topic(message: types.Message):
                                    for quote_, author in quotes_and_authors_list)
     await bot.send_message(message.from_user.id, '📝' + final_message,
                            reply_markup=kb.cancel_kb)
+    await bot.send_message(message.from_user.id, 'Какая ещё тема тебя интересует? 👇',
+                           reply_markup=kb.cancel_kb)
 
 
 @dp.message_handler(commands=['quiz'])
