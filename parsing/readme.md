@@ -18,15 +18,15 @@
 
 ## Служебные файлы:
 
-- authors_for_quiz_1.pickle — уникальные авторы из data_for_quiz_1.csv (для квиза)
+- authors_for_quiz.csv — уникальные авторы из data_for_quiz_1.csv 
 
-- links.pickle — лист с ссылками на разделы http://uaforizm.com/
+- links.csv — ссылки на разделы http://uaforizm.com/
 
-- links2.pickle — лист с ссылками на топ 500 авторов https://mislitel.info/
+- links2.csv — ссылки на топ 500 авторов https://mislitel.info/
 
-- themes.pickle — лист с ключевыми слвоами с http://uaforizm.com/
+- themes.csv — ключевые с http://uaforizm.com/
 
-- tags.pickle — лист со всеми уникальными тегами big_data.csv
+- tags.csv — уникальные теги big_data.csv
 
 
 ## other
