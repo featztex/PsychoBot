@@ -40,3 +40,30 @@
 - questions.txt — 60к вопросительных предложений
 
 - short.txt — 320к коротких предложений и словосочетаний
+
+
+# scripts 
+
+- df_concat.py — небольшой скрипт для сборки big_data.csv
+
+- encoding_for_big_data.py — энкодинг по тегам для big_data.csv
+
+- new_features.ipynb — косметическая обработка и добавление пары новых фичей в big_data.csv
+
+- parser_keywords.ipynb — скрипт создания themes.pickle
+
+- parser_links.ipynb — скрипт создания links.pickle (c uaforizm.com)
+
+- parser_links2.ipynb — скрипт создания links2.pickle (c mislitel.info)
+
+- parser_phrases.ipynb — парсим uaforizm.com, создаем data.csv
+
+- parser_phrases2.ipynb — парсим mislitel.info, создаем big_data.csv
+
+- parser_tags.ipynb — скрипт создания tags.pickle
+
+- processing_tagged.ipynb — чистим tagged.txt, он превращается в cleaned_tagged.txt
+
+- quiz_1.py — данные для викторины
+
+- quiz_2.py — скрипт создания authors_for_quiz_1.pickle
