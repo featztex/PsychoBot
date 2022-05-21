@@ -6,7 +6,9 @@
 
 ## Файлы для использования:
 
-- big_data.csv — обработанные данные <цитата—автор—теги> с парой добавленных фичей с https://mislitel.info/ (35к строк), наш основной датасет без энкодинга
+- big_data.csv — обработанные данные <цитата—автор—теги> с парой добавленных фичей с https://mislitel.info/ (35к строк), наш основной датасет без энкодинга (переехал в TGBot)
+
+- data_for_quiz_1.csv — небольшой датасет <цитата—автор> для викторины (120 строк) (переехал в TGBot)
 
 - processed_data.csv — big_data.csv с энкодингом по всем хештегам, удалены бесполезные столбцы (теги, по которым находится меньше 10 фраз)
 
@@ -14,11 +16,10 @@
 
 - data.csv — чистые данные <цитата—автор> с http://uaforizm.com/ (1к строк)
 
-- data_for_quiz_1.csv — небольшой датасет <цитата—автор> для викторины (120 строк)
 
 ## Служебные файлы:
 
-- authors_for_quiz.csv — уникальные авторы из data_for_quiz_1.csv 
+- authors_for_quiz.csv — уникальные авторы из data_for_quiz_1.csv (переехал в TGBot)
 
 - links.csv — ссылки на разделы http://uaforizm.com/
 
@@ -48,18 +49,18 @@
 
 - processing_big_data.py — косметическая обработка и добавление пары новых фичей в big_data.csv
 
-- parser_links.py — скрипт создания links.pickle (c uaforizm.com)
+- parser_links.py — скрипт создания links.csv (c uaforizm.com)
 
-- parser_links2.py — скрипт создания links2.pickle (c mislitel.info)
+- parser_links2.py — скрипт создания links2.csv (c mislitel.info)
 
 - parser_phrases.py — парсим uaforizm.com, создаем data.csv
 
 - parser_phrases2.py — парсим mislitel.info, создаем big_data.csv
 
-- parser_tags.ipynb — скрипт создания tags.pickle
+- parser_tags.py — скрипт создания tags.csv
 
-- processing_tagged.ipynb — чистим tagged.txt, он превращается в cleaned_tagged.txt
+- processing_tagged.py — чистим tagged.txt, он превращается в cleaned_tagged.txt
 
 - quiz_1.py — данные для викторины
 
-- quiz_2.py — скрипт создания authors_for_quiz_1.pickle
+- quiz_2.py — скрипт создания authors_for_quiz.csv
