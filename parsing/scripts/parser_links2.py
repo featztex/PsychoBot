@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import pickle
+import pandas as pd
 
 url_ = 'https://mislitel.info/authors'
 links = []
@@ -21,5 +21,5 @@ for i in range(1,6):
         href = 'https://mislitel.info' + i.find('a').get('href')
         links.append(href)
 
-with open('links2.pickle', 'wb') as f:
-    pickle.dump(links, f)
+df = pd.DataFrame({'' : pd.Series(links)})
+df.to_csv('python/PsychoBot/parsing/data/links2.csv')
