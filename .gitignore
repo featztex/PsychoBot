@@ -1,10 +1,3 @@
-parsing/scripts/async_parser_tags.py
-parsing/scripts/test.py
-parsing/scripts/convert.py
-parsing/data/other/short1.txt
-parsing/data/other/short2.txt
-parsing/data/other/short3.txt
-parsing/data/other/short4.txt
 TGbot/config.py
 ml/CLI/__pycache__
 ml/.ipynb_checkpoints
