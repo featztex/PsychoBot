@@ -19,7 +19,7 @@ class QuizCounter:
         self.user_quiz = {}
         self.user_correct = {}
 
-def take_random_quote(pd_data):
+def take_random_quote_and_author(pd_data):
    rand_num = random.randint(0, pd_data.shape[0])
    return [pd_data.iloc[rand_num]['Цитата'], pd_data.iloc[rand_num]['Автор']]
 
@@ -29,10 +29,9 @@ dp = Dispatcher(bot, storage=MemoryStorage())
 
 DATA_PATH = op.join(op.dirname(__file__), 'data_and_models')
 DATA_FOR_QUIZ = pd.read_csv(op.join(DATA_PATH, 'data_for_quiz_1.csv'))
-AUTHORS_FOR_QUIZ = pd.read_csv(op.join(DATA_PATH, 'authors_for_quiz.csv'))
 
 QUOTE = Quote(op.join(DATA_PATH, 'big_data.csv'), op.join(DATA_PATH, 'pure_q_35k.csv'), 
-              op.join(DATA_PATH, '/d2v_35k_exp.model'))
+              op.join(DATA_PATH, 'd2v_35k_exp.model'))
 quiz_counter = QuizCounter()
 
 
@@ -90,7 +89,7 @@ async def start_quiz(message: types.Message):
     await dp.current_state(user=message.from_user.id).set_state('quiz')
     await bot.send_message(message.from_user.id, msgs.start_quiz, 
                            reply_markup=kb.cancel_kb)
-    quiz_quote, correct_author = take_random_quote(DATA_FOR_QUIZ)
+    quiz_quote, correct_author = take_random_quote_and_author(DATA_FOR_QUIZ)
     quiz_counter.user_quiz[message.from_user.id] = 1
     quiz_counter.user_correct[message.from_user.id] = 0
     await bot.send_message(message.from_user.id, msgs.who_is_author + '📝' + quiz_quote, 
@@ -111,7 +110,7 @@ async def check_quiz_answer(query: types.CallbackQuery):
         else:
             is_correct = '❌ Неправильно\n\n'
 
-        quiz_quote, correct_author = take_random_quote(DATA_FOR_QUIZ)
+        quiz_quote, correct_author = take_random_quote_and_author(DATA_FOR_QUIZ)
         quiz_counter.user_quiz[query.from_user.id] += 1
         await bot.send_message(query.from_user.id, is_correct + msgs.who_is_author + '📝' +\
                             quiz_quote, reply_markup=kb.guess_author_kb(correct_author, quiz_counter.user_quiz[query.from_user.id]))

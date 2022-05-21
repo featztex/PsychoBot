@@ -5,6 +5,12 @@ from aiogram.types import ReplyKeyboardRemove, \
     InlineKeyboardMarkup, InlineKeyboardButton
 import pickle
 from random import randint, shuffle
+import pandas as pd
+import os.path as op
+from bot import DATA_PATH, take_random_quote_and_author
+
+
+AUTHORS_FOR_QUIZ = pd.read_csv(op.join(DATA_PATH, 'authors_for_quiz.csv')).values.tolist()
 
 start_kb_buttons = ['📚Цитаты по теме', '🎲Викторина']
 start_kb = ReplyKeyboardMarkup(resize_keyboard=True).add(*start_kb_buttons)
@@ -18,13 +24,9 @@ choose_quiz_kb = ReplyKeyboardMarkup(resize_keyboard=True).add(*quizzes)
 choose_quiz_kb.add('🔙 Назад')
 
 def guess_author_kb(correct_author, quiz_id):
-    with open('data_and_models/authors_for_quiz_1.pickle', 'rb') as f:
-        names = list(pickle.load(f))
-        names.remove(correct_author)
-    
     wrong_authors = set()
     while len(wrong_authors) < 3:
-        wrong_authors.add(names[randint(0, len(names) - 1)])
+        wrong_authors.add(AUTHORS_FOR_QUIZ[randint(0, len(AUTHORS_FOR_QUIZ) - 1)][1])
     authors_and_answers = [(correct_author, 'correct')] +\
                          [(wrong_author, 'wrong') for wrong_author in wrong_authors]
     shuffle(authors_and_answers)
