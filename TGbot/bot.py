@@ -5,12 +5,12 @@ import logging
 import keyboards as kb
 import messages as msgs
 import sys 
-sys.path.append('../../ml/CLI')
+sys.path.append('../ml/CLI')
 from CLI import Quote
 import pandas as pd
 import random
 
-data_for_quiz = pd.read_csv('../../parsing/data/data_for_quiz_1.csv')
+data_for_quiz = pd.read_csv('../parsing/data/data_for_quiz_1.csv')
 def take_random_quote():
     rand_num = random.randint(0, data_for_quiz.shape[0])
     return [data_for_quiz.iloc[rand_num]['Цитата'], data_for_quiz.iloc[rand_num]['Автор']]
@@ -27,8 +27,8 @@ class QuizCounter:
 bot = Bot(token=config.API_TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
-quote = Quote('../../parsing/data/big_data.csv', '../../ml/processed_data/pure_q_35k.csv', 
-              '../../ml/models/d2v_35k_exp.model')
+quote = Quote('../parsing/data/big_data.csv', '../ml/processed_data/pure_q_35k.csv', 
+              '../ml/models/d2v_35k_exp.model')
 quote.Q_NUMBER = 5
 quiz_counter = QuizCounter()
 

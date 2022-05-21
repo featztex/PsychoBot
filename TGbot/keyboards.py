@@ -18,7 +18,7 @@ choose_quiz_kb = ReplyKeyboardMarkup(resize_keyboard=True).add(*quizzes)
 choose_quiz_kb.add('🔙 Назад')
 
 def guess_author_kb(correct_author, quiz_id):
-    with open('../../parsing/data/authors_for_quiz_1.pickle', 'rb') as f:
+    with open('../parsing/data/authors_for_quiz_1.pickle', 'rb') as f:
         names = list(pickle.load(f))
         names.remove(correct_author)
     
