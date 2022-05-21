@@ -17,8 +17,8 @@ quizzes = ['Угадай автора по цитате']
 choose_quiz_kb = ReplyKeyboardMarkup(resize_keyboard=True).add(*quizzes)
 choose_quiz_kb.add('🔙 Назад')
 
-def guess_author_kb(correct_author):
-    with open('../../parsing/data/authors_for_quiz_1.pickle', 'rb') as f:
+def guess_author_kb(correct_author, quiz_id):
+    with open('../parsing/data/authors_for_quiz_1.pickle', 'rb') as f:
         names = list(pickle.load(f))
         names.remove(correct_author)
     
@@ -29,7 +29,7 @@ def guess_author_kb(correct_author):
                          [(wrong_author, 'wrong') for wrong_author in wrong_authors]
     shuffle(authors_and_answers)
 
-    authors_bttns = (InlineKeyboardButton(author, callback_data =answer) for
+    authors_bttns = (InlineKeyboardButton(author, callback_data=answer+' '+str(quiz_id)) for
                     author, answer in authors_and_answers)
     authors_kb = InlineKeyboardMarkup(row_width=3)
     for button in authors_bttns:

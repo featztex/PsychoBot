@@ -1,25 +1,69 @@
-Файлы для использования:
+# Описание
 
-cleaned_tagged.txt - очищенный текстовик (12к строк)
+В этой папке представлены все датасеты, которые так или иначе пригодились в нашем проекте, а также скрипты, с помощью которых они создавались
 
-data.csv - чистые данные <цитата-автор> с http://uaforizm.com/ (1к строк)
+# data
 
-data_for_quiz_1.csv - небольшой датасет <цитата-автор> для викторины (120 строк)
+## Файлы для использования:
 
-authors_for_quiz_1.pickle - уникальные авторы из data_for_quiz_1.csv (для квиза)
+- big_data.csv — обработанные данные <цитата—автор—теги> с парой добавленных фичей с https://mislitel.info/ (35к строк), наш основной датасет без энкодинга
 
-big_data.csv - обработанные данные <цитата-автор-теги> с парой добавленных фичей с https://mislitel.info/ (35к строк)
+- processed_data.csv — big_data.csv с энкодингом по всем хештегам, удалены бесполезные столбцы (теги, по которым находится меньше 10 фраз)
 
-processed_data.csv - big_data.csv с энкодингом по всем хештегам, удалены бесполезные столбцы (теги, по которым находится меньше 10 фраз)
+- cleaned_tagged.txt — очищенный текстовик с цитатами (12к строк)
+
+- data.csv — чистые данные <цитата—автор> с http://uaforizm.com/ (1к строк)
+
+- data_for_quiz_1.csv — небольшой датасет <цитата—автор> для викторины (120 строк)
+
+## Служебные файлы:
+
+- authors_for_quiz_1.pickle — уникальные авторы из data_for_quiz_1.csv (для квиза)
+
+- links.pickle — лист с ссылками на разделы http://uaforizm.com/
+
+- links2.pickle — лист с ссылками на топ 500 авторов https://mislitel.info/
+
+- themes.pickle — лист с ключевыми слвоами с http://uaforizm.com/
+
+- tags.pickle — лист со всеми уникальными тегами big_data.csv
 
 
+## other
 
-Служебные файлы:
+- conversation1.txt — 330к строк с тренировочными диалогами
 
-links.pickle - лист с ссылками на разделы http://uaforizm.com/
+- conversation2.txt — 200к строк с диалогами из книг
 
-themes.pickle - лист с ключевыми слвоами с http://uaforizm.com/
+- poetry.csv — 17к небольших стихотворений
 
-links2.pickle - лист с ссылками на топ500 авторов https://mislitel.info/
+- questions.txt — 60к вопросительных предложений
 
-tags.pickle - лист со всеми уникальными тегами big_data.csv
+- short.txt — 320к коротких предложений и словосочетаний
+
+
+# scripts 
+
+- df_concat.py — небольшой скрипт для сборки big_data.csv
+
+- encoding_for_big_data.py — энкодинг по тегам для big_data.csv
+
+- new_features.ipynb — косметическая обработка и добавление пары новых фичей в big_data.csv
+
+- parser_keywords.ipynb — скрипт создания themes.pickle
+
+- parser_links.ipynb — скрипт создания links.pickle (c uaforizm.com)
+
+- parser_links2.ipynb — скрипт создания links2.pickle (c mislitel.info)
+
+- parser_phrases.ipynb — парсим uaforizm.com, создаем data.csv
+
+- parser_phrases2.ipynb — парсим mislitel.info, создаем big_data.csv
+
+- parser_tags.ipynb — скрипт создания tags.pickle
+
+- processing_tagged.ipynb — чистим tagged.txt, он превращается в cleaned_tagged.txt
+
+- quiz_1.py — данные для викторины
+
+- quiz_2.py — скрипт создания authors_for_quiz_1.pickle
