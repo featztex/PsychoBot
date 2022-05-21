@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import pickle
+import pandas as pd
 
 url = 'http://uaforizm.com/'
 data = requests.get(url)
@@ -15,5 +15,5 @@ for i in sp:
     if ('https:' in href):
         links.append(href)
 
-with open('links.pickle', 'wb') as f:
-    pickle.dump(links, f)
+df = pd.DataFrame({'' : pd.Series(links)})
+df.to_csv('python/PsychoBot/parsing/data/links.csv')
