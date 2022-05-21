@@ -1,11 +1,8 @@
-TGbot/FirstTestBot/config.py
 parsing/scripts/async_parser_tags.py
 parsing/scripts/test.py
 parsing/data/other/short1.txt
 parsing/data/other/short2.txt
 parsing/data/other/short3.txt
 parsing/data/other/short4.txt
-TGbot/FinalBot/config.py
-TGbot/FinalBot/test.py
-TGbot/FinalBot/ideas.txt
-TGbot/FinalBot/__pycache__
+TGbot/config.py
+ml/CLI/__pycache__
