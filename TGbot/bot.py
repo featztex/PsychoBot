@@ -4,35 +4,37 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 import logging
 import keyboards as kb
 import messages as msgs
-import sys 
-sys.path.append('../ml/CLI')
+import os.path as op 
+from pathlib import Path
 from CLI import Quote
 import pandas as pd
 import random
 
-data_for_quiz = pd.read_csv('../parsing/data/data_for_quiz_1.csv')
-def take_random_quote():
-    rand_num = random.randint(0, data_for_quiz.shape[0])
-    return [data_for_quiz.iloc[rand_num]['Цитата'], data_for_quiz.iloc[rand_num]['Автор']]
+
+logging.basicConfig(level=logging.INFO)
 
 
-"""Класс для подсчёта правильных ответов пользователя 
- и контролирования того, что пользователь отвечает на нужный вопрос"""
 class QuizCounter:
     def __init__(self):
-        self.user_quiz = dict()
-        self.user_correct = dict()
+        self.user_quiz = {}
+        self.user_correct = {}
+
+def take_random_quote(pd_data):
+   rand_num = random.randint(0, pd_data.shape[0])
+   return [pd_data.iloc[rand_num]['Цитата'], pd_data.iloc[rand_num]['Автор']]
 
 
 bot = Bot(token=config.API_TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
-quote = Quote('../parsing/data/big_data.csv', '../ml/processed_data/pure_q_35k.csv', 
-              '../ml/models/d2v_35k_exp.model')
-quote.Q_NUMBER = 5
+DATA_PATH = op.join(op.dirname(__file__), 'data_and_models')
+DATA_FOR_QUIZ = pd.read_csv(op.join(DATA_PATH, 'data_for_quiz_1.csv'))
+AUTHORS_FOR_QUIZ = pd.read_csv(op.join(DATA_PATH, 'authors_for_quiz.csv'))
+
+QUOTE = Quote(op.join(DATA_PATH, 'big_data.csv'), op.join(DATA_PATH, 'pure_q_35k.csv'), 
+              op.join(DATA_PATH, '/d2v_35k_exp.model'))
 quiz_counter = QuizCounter()
 
-logging.basicConfig(level=logging.INFO)
 
 
 @dp.message_handler(commands=['start'])
@@ -71,8 +73,8 @@ async def get_topic(message: types.Message):
 
 @dp.message_handler(state='get_topic')
 async def send_quotes_by_topic(message: types.Message):
-    quote.preprocess_text(message.text)
-    quotes_and_authors_list = quote.basic_model()
+    QUOTE.preprocess_text(message.text)
+    quotes_and_authors_list = QUOTE.basic_model()
     final_message = '\n\n📝'.join(quote_ + '\n' + '© ' + author 
                                    for quote_, author in quotes_and_authors_list)
     await bot.send_message(message.from_user.id, '📝' + final_message,
@@ -88,7 +90,7 @@ async def start_quiz(message: types.Message):
     await dp.current_state(user=message.from_user.id).set_state('quiz')
     await bot.send_message(message.from_user.id, msgs.start_quiz, 
                            reply_markup=kb.cancel_kb)
-    quiz_quote, correct_author = take_random_quote()
+    quiz_quote, correct_author = take_random_quote(DATA_FOR_QUIZ)
     quiz_counter.user_quiz[message.from_user.id] = 1
     quiz_counter.user_correct[message.from_user.id] = 0
     await bot.send_message(message.from_user.id, msgs.who_is_author + '📝' + quiz_quote, 
@@ -109,7 +111,7 @@ async def check_quiz_answer(query: types.CallbackQuery):
         else:
             is_correct = '❌ Неправильно\n\n'
 
-        quiz_quote, correct_author = take_random_quote()
+        quiz_quote, correct_author = take_random_quote(DATA_FOR_QUIZ)
         quiz_counter.user_quiz[query.from_user.id] += 1
         await bot.send_message(query.from_user.id, is_correct + msgs.who_is_author + '📝' +\
                             quiz_quote, reply_markup=kb.guess_author_kb(correct_author, quiz_counter.user_quiz[query.from_user.id]))
