@@ -3,11 +3,10 @@
 from aiogram.types import ReplyKeyboardRemove, \
     ReplyKeyboardMarkup, KeyboardButton, \
     InlineKeyboardMarkup, InlineKeyboardButton
-import pickle
 from random import randint, shuffle
 import pandas as pd
 import os.path as op
-from bot import DATA_PATH, take_random_quote_and_author
+from bot import DATA_PATH
 
 
 AUTHORS_FOR_QUIZ = pd.read_csv(op.join(DATA_PATH, 'authors_for_quiz.csv')).values.tolist()
