@@ -1,20 +1,12 @@
-
-
-
 import pandas as pd
 from string import punctuation
 from pymystem3 import Mystem
-from nltk.corpus import stopwords
+#from nltk.corpus import stopwords
 import gensim
-
-# import nltk
-# import sys
-# import argparse
 
 
 
 class Quote:
-    user_feelings = ""
     list_for_model = []
     processed_feelings = ""
     path_to_csv = ""
@@ -29,7 +21,15 @@ class Quote:
         # files:
         # Create lemmatizer and stopwords list
         self.mystem = Mystem()
-        self.russian_stopwords = stopwords.words("russian")
+        #self.russian_stopwords = stopwords.words("russian")
+        self.russian_stopwords = ['и', 'в', 'во', 'не', 'что', 'он', 'на', 'я', 'с', 'со', 'как', 'а', 'то', 'все', 'она', 'так', 'его', 'но', 'да', 'ты', 'к', 'у', 'же',
+                                  'вы', 'за', 'бы', 'по', 'только', 'ее', 'мне', 'было', 'вот', 'от', 'меня', 'еще', 'нет', 'о', 'из', 'ему', 'теперь', 'когда', 'даже', 'ну',
+                                  'вдруг', 'ли', 'если', 'уже', 'или', 'ни', 'быть', 'был', 'него', 'до', 'вас', 'нибудь', 'опять', 'уж', 'вам', 'ведь', 'там', 'потом', 'себя',
+                                  'ничего', 'ей', 'может', 'они', 'тут', 'где', 'есть', 'надо', 'ней', 'для', 'мы', 'тебя', 'их', 'чем', 'была', 'сам', 'чтоб', 'без', 'будто',
+                                  'чего', 'раз', 'тоже', 'себе', 'под', 'будет', 'ж', 'тогда', 'кто', 'этот', 'того', 'потому', 'этого', 'какой', 'совсем', 'ним', 'здесь', 'этом',
+                                  'один', 'почти', 'мой', 'тем', 'чтобы', 'нее', 'сейчас', 'были', 'куда', 'зачем', 'всех', 'никогда', 'можно', 'при', 'наконец', 'два', 'об', 'другой',
+                                  'хоть', 'после', 'над', 'больше', 'тот', 'через', 'эти', 'нас', 'про', 'всего', 'них', 'какая', 'много', 'разве', 'три', 'эту', 'моя', 'впрочем', 'хорошо',
+                                  'свою', 'этой', 'перед', 'иногда', 'лучше', 'чуть', 'том', 'нельзя', 'такой', 'им', 'более', 'всегда', 'конечно', 'всю', 'между']
         # reading csv
         self.df_35k = pd.read_csv(self.path_to_data, sep=',', engine='python')
         # processed_q.csv
@@ -72,24 +72,4 @@ class Quote:
     def end_of_quote(self, real_quote, guessed_quote):
 
         self.model.dv.n_similarity(real_quote, guessed_quote)
-#
-#
-# def createParser():
-#     parser = argparse.ArgumentParser()
-#     parser.add_argument('text', nargs=1)
-#     return parser
-#
-# parser = createParser()
-# namespace = parser.parse_args(sys.argv[1:])
-#
-# # Эту строчку можно закоментить после первого запуска
-# #nltk.download("stopwords")
-# # при инициализации нужно указывать сначала путь к csv, потом к моделям, насколько я понял нужен полный путь
-# # через относительный не смог найти как это сделать. Можно в теории использовать pathlib, но пока хз насколько имеет смысл это делать
-# #/home/alex/4sem/Project/PsychoBot/parsing/data/
-# #/home/alex/4sem/Project/PsychoBot/ml/processed_data/
-# p = Quote("../../parsing/data/big_data.csv",
-#           "../processed_data/pure_q_35k.csv",
-#           "../models/d2v_35k_exp.model")
-# p.preprocess_text("".join(namespace.text))
-# print(p.basic_model())
+
