@@ -1,6 +1,7 @@
 parsing/scripts/async_parser_tags.py
 parsing/scripts/test.py
 parsing/scripts/convert.py
+parsing/scripts/parser_keys.py
 parsing/data/other/short1.txt
 parsing/data/other/short2.txt
 parsing/data/other/short3.txt
