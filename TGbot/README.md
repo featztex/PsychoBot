@@ -2,3 +2,6 @@
 
 - FirstTestBot - тестовая версия бота с небольшим функционалом
 - FinalBot - итоговая реализация бота
+
+
+Оба бота реализованы на языке Python3 с использованием библиотеки aiogram (https://github.com/aiogram/aiogram)
