@@ -46,7 +46,7 @@ class Quote:
         self.model = gensim.models.doc2vec.Doc2Vec.load(path_to_model)
 
         # suggested quotes
-        self.Q_NUMBER = 6
+        self.Q_NUMBER = 5
 
     # Preprocess function (stopwords, puncuation, etc)
     def preprocess_text(self, text):
