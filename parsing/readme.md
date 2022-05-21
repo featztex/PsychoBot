@@ -24,8 +24,6 @@
 
 - links2.csv — ссылки на топ 500 авторов https://mislitel.info/
 
-- themes.csv — ключевые с http://uaforizm.com/
-
 - tags.csv — уникальные теги big_data.csv
 
 
@@ -48,17 +46,15 @@
 
 - encoding_for_big_data.py — энкодинг по тегам для big_data.csv
 
-- new_features.ipynb — косметическая обработка и добавление пары новых фичей в big_data.csv
+- processing_big_data.py — косметическая обработка и добавление пары новых фичей в big_data.csv
 
-- parser_keywords.ipynb — скрипт создания themes.pickle
+- parser_links.py — скрипт создания links.pickle (c uaforizm.com)
 
-- parser_links.ipynb — скрипт создания links.pickle (c uaforizm.com)
+- parser_links2.py — скрипт создания links2.pickle (c mislitel.info)
 
-- parser_links2.ipynb — скрипт создания links2.pickle (c mislitel.info)
+- parser_phrases.py — парсим uaforizm.com, создаем data.csv
 
-- parser_phrases.ipynb — парсим uaforizm.com, создаем data.csv
-
-- parser_phrases2.ipynb — парсим mislitel.info, создаем big_data.csv
+- parser_phrases2.py — парсим mislitel.info, создаем big_data.csv
 
 - parser_tags.ipynb — скрипт создания tags.pickle
 
